@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voice on Hover</title>
+  <style>
+    /* Add some basic styling */
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+    .hover-text {
+      display: inline-block;
+      position: relative;
+      cursor: pointer;
+    }
+    /* Add a tooltip style */
+    .tooltip {
+      visibility: hidden;
+      width: 200px;
+      background-color: #555;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      margin-left: -100px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    /* Show the tooltip on hover */
+    .hover-text:hover .tooltip {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+    <div class="hover-text" onmouseover="speak('Bonjour, comment ça va?');" onmouseout="stopSpeaking();">
+      Bunaziua, cum la voi?
+        <div class="tooltip">Ecoute du texte ...</div>
+      </div>
+      <div class="hover-text" onmouseover="speak('Localisation: Paris 18ème');" onmouseout="stopSpeaking();">
+        Localisation: Paris 18ème
+        <div class="tooltip">Ecoute du texte ...</div>
+      </div>
+      <div class="hover-text" onmouseover="speak('Mail pour contacter: pages@jaune.fr');" onmouseout="stopSpeaking();">
+        Mail pour contacter: pages@jaune.fr
+        <div class="tooltip">Ecoute du texte ...</div>
+      </div>
+
+  <script>
+    // Function to speak the given text
+    function speak(text) {
+      const synth = window.speechSynthesis;
+      const utterance = new SpeechSynthesisUtterance(text);
+      synth.speak(utterance);
+    }
+
+    // Function to stop speaking
+    function stopSpeaking() {
+      const synth = window.speechSynthesis;
+      synth.cancel();
+    }
+  </script>
+
+</body>
+</html>
